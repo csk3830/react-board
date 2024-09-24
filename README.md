@@ -1,6 +1,7 @@
 # SK React Board
 
-이 프로젝트는 React를 사용하여 개발된 게시판 애플리케이션입니다. 사용자는 글을 작성, 수정, 삭제하고 댓글을 남길 수 있습니다.
+이 프로젝트는 React를 사용하여 개발된 게시판 애플리케이션입니다.
+글을 작성, 수정, 삭제하고 댓글을 남길 수 있습니다.
 
 ## 기능
 
@@ -18,26 +19,6 @@
 - **Backend**: Express (가상 API)
 - **Axios**: API 요청을 위한 라이브러리
 - **CSS**: 기본 스타일링
-
-## 설치 및 실행
-
-1. 프로젝트 클론하기:
-   ```bash
-   git clone <repository-url>
-   cd sk-react-board
-   ```
-
-2. 의존성 설치:
-   ```bash
-   npm install
-   ```
-
-3. 애플리케이션 실행:
-   ```bash
-   npm start
-   ```
-
-4. 웹 브라우저에서 `http://localhost:3000`으로 접속
 
 ## 사용 방법
 
