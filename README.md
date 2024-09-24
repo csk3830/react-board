@@ -17,6 +17,7 @@
 
 - **Frontend**: React, React Router
 - **Backend**: Express (가상 API)
+- **Database**: MySQL
 - **Axios**: API 요청을 위한 라이브러리
 - **CSS**: 기본 스타일링
 
