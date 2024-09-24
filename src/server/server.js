@@ -43,17 +43,45 @@ app.get('/', (req,res)=>{
 });
 
 //게시글 목록 가져오기
-app.get('/list', (req, res)=>{
-    const sql = 'select * from sk_board order by id desc';
-    db.query(sql, (err, data)=>{
-        if(!err){
-            res.send(data);
-        }else{
+app.get('/list', (req, res) => {
+    const page = parseInt(req.query.page) || 1; // 현재 페이지
+    const limit = 8; // 페이지당 항목 수
+    const offset = (page - 1) * limit; // 시작 위치
+    const search = req.query.search || ''; // 검색어
+    const category = req.query.category || 'title'; // 검색 카테고리
+
+    // 검색 쿼리 동적으로 생성
+    let countSql = `SELECT COUNT(*) AS totalCount FROM sk_board WHERE ${category} LIKE ?`;
+    let sql = `
+        SELECT b.*, COUNT(c.id) AS comment_count
+        FROM sk_board b
+        LEFT JOIN comments c ON b.id = c.post_id
+        WHERE ${category} LIKE ?
+        GROUP BY b.id
+        ORDER BY b.id DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    db.query(countSql, [`%${search}%`], (err, countData) => {
+        if (err) {
             console.log(err);
-            res.send('전송오류');
+            return res.send('전송 오류');
         }
-    })
+
+        const totalCount = countData[0].totalCount; // 총 게시글 수
+        const totalPages = Math.ceil(totalCount / limit); // 전체 페이지 수
+
+        db.query(sql, [`%${search}%`, limit, offset], (err, data) => {
+            if (!err) {
+                res.send({ data, totalPages }); // 데이터와 totalPages를 반환
+            } else {
+                console.log(err);
+                res.send('전송 오류');
+            }
+        });
+    });
 });
+
 
 //게시물 하나 가져오기 :id
 app.get('/detail/:id', (req, res)=>{

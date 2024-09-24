@@ -21,6 +21,13 @@ const Comment = ({ postId }) => {
         fetchComments();
     };
 
+    const handleDeleteComment = async (commentId) => {
+        if (window.confirm('이 댓글을 삭제하시겠습니까?')) {
+            await axios.delete(`/comments/${commentId}`);
+            fetchComments(); // 삭제 후 댓글 목록 새로고침
+        }
+    };
+
     return (
         <div className='comment'>
             <form onSubmit={handleCommentSubmit}>
@@ -46,7 +53,7 @@ const Comment = ({ postId }) => {
                 {comments.map(comment => (
                     <li key={comment.id}>
                         <span>{comment.user}</span><br /><strong>{comment.content} </strong>
-                        {/* 댓글 삭제 버튼은 추가적으로 구현 가능 */}
+                        <button onClick={() => handleDeleteComment(comment.id)}>X</button>
                     </li>
                 ))}
             </ul>

@@ -11,7 +11,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video, input, textarea {
+time, mark, audio, video, input, textarea, select {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -47,7 +47,7 @@ table {
 
 /* 전체적인 스타일 */
 body {
-    font-family: "Orbit", sans-serif;
+    font-family: sans-serif;
     background-color: #f9f9f9;
     font-size: 16px;
     margin: 0;
@@ -72,6 +72,10 @@ body {
     width: 100px;
     height: 100px;
 }
+.boardHome h2 {
+    margin-bottom: 15px;
+    color: #000000;
+}
 /* 게시글 목록 스타일 */
 .boardList {
     background: #ffffff;
@@ -89,9 +93,36 @@ body {
 .boardList tr:hover td {
     background-color: inherit; /* td의 배경색을 tr의 배경색으로 설정 */
 }
-.boardHome h2 {
+.boardList .searchs{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
     margin-bottom: 15px;
-    color: #000000;
+}
+.boardList .searchs input{
+    margin-bottom: 0;
+}
+.boardList .searchs button{
+    width: 70px;
+}
+.searchs select {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #ffcc00;
+    height: 48px;
+    line-height: 16px;
+}
+
+.searchs select:hover {
+    background-color: #ffe4e4;
+}
+.searchs select:focus {
+    outline: none; 
+    border-color: #ff6f61;
 }
 
 /* 테이블 스타일 */
@@ -100,6 +131,9 @@ body {
     border-collapse: collapse;
 }
 
+.boardList table .title strong{
+    color: #ff6f61;
+}
 .boardList th, .boardList td {
     padding: 12px;
     text-align: left;
@@ -118,11 +152,28 @@ body {
 .boardList .title{
     cursor: pointer;
 }
+.boardList .pagination{
+    display: flex;
+    gap: 5px;
+    border-radius: none;
+    justify-content: center;
+    margin-top: 10px;
+}
+.boardList .pagination button{
+    background-color: #ffcccb;
+    color: #000000;
+}
+.boardList .pagination button:disabled {
+    background-color: transparent;
+    font-weight: bold;
+}
 .boardList .listBot{
     display: flex;
     justify-content: end;
 }
-
+.boardList .listBot button{
+    margin-bottom: 0px;
+}
 
 /* 게시글 상세 페이지 스타일 */
 .boardDetail {
@@ -179,6 +230,7 @@ body {
 }
 .comment ul li{
     line-height: 25px;
+    padding-top: 15px;
 }
 .comment ul li span{
     color: gray;
